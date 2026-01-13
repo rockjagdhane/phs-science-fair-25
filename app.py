@@ -2025,10 +2025,15 @@ if "pdb_filename" not in st.session_state:
     st.session_state["pdb_filename"] = None
 
 # PDB file selection
-PDB_DIR = os.path.join(ROOT, "pdb")
+PDB_DIR = ROOT
 pdb_files = []
-if os.path.exists(PDB_DIR):
-    pdb_files = [f for f in os.listdir(PDB_DIR) if f.lower().endswith('.pdb')]
+try:
+    if os.path.exists(PDB_DIR):
+        all_files = os.listdir(PDB_DIR)
+        pdb_files = [f for f in all_files if f.lower().endswith('.pdb')]
+except Exception as e:
+    # If there's an error listing directory, just continue with empty list
+    pdb_files = []
 
 st.sidebar.header("📁 Data Source")
 uploaded_csv = st.sidebar.file_uploader("Upload mutations CSV (optional)", type=["csv"])
@@ -2057,6 +2062,7 @@ if pdb_files:
             st.session_state["processed_pdb_hash"] = None
 else:
     selected_pdb_file = None
+    st.sidebar.info(f"💡 No PDB files found in directory: `{PDB_DIR}`\n\nYou can upload a PDB file below.")
 
 uploaded_pdb = st.sidebar.file_uploader("Or upload your own PDB file", type=["pdb"], key="pdb_uploader")
 
@@ -2709,7 +2715,7 @@ else:
     if py3Dmol is None:
         st.info("⚠️ py3Dmol not installed — install 'py3Dmol' to enable 3D viewer: `pip install py3Dmol`")
     else:
-        st.info("📋 No PDB available to render in 3D. Upload one in the sidebar, select from the PDB directory, or ensure internet access to fetch from RCSB.")
+        st.info("📋 No PDB available to render in 3D. Upload one in the sidebar, select from the directory, or ensure internet access to fetch from RCSB.")
 
 # Google Sheets QR Code Display
 st.markdown("---")
