@@ -2931,11 +2931,3 @@ if st.session_state.get('cheat_code_activated', False):
     if st.button("🔒 Hide Research Generator"):
         st.session_state['cheat_code_activated'] = False
         safe_rerun()
-
-
-
-# Provenance
-st.markdown("---")
-st.markdown("**Grounded simulation methods:** substitutions use chemically-informed heuristics, insertions/deletions sample realistic ranges, nonsense/frameshift set fitness=0. Data generation is deterministic for given PDB.")
-st.markdown("**Mutation consequence predictions:** Combines computational predictions (based on mutation type, ΔΔG values, functional fitness) with **real-time database lookups** from UniProt, ClinVar, and other sources. Pathogenicity classifications follow ACMG guidelines. When available, actual disease associations from databases are shown. For clinical decisions, always consult experimental validation and authoritative clinical databases.")
-st.caption("Built for your science fair. If you want extra slide layout choices, commentary voiceover, or desktop build next, tell me and I'll add it.")
