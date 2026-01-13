@@ -56,7 +56,3 @@ The MIS proves that computational modeling can effectively predict biological ou
 Author: Rock
 Category: Computational Biology / Bioinformatics
 Date: January 2026
-
-Category: Computational Biology / Bioinformatics
-
-Date: January 2026
